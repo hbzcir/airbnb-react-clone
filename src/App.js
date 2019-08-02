@@ -1,11 +1,26 @@
+//import React,{ useState } from 'react';
 import React from 'react';
+import Home from './pages/Home'
 
-function App() {
+// react hooks
+const App = () => {
+
   return (
     <div>
-      가나다라
+      <Home />
     </div>
-  );
+  )
+
+  // const [item, setItem] = useState(1);
+  // const incrementItem = () => { setItem(item + 1) };
+  // const decrementItem = () => { setItem(item - 1) };
+  // return (
+  //   <div className="SetAmount">
+  //     {item}
+  //     <button onClick={incrementItem}> IncrementItem </button>
+  //     <button onClick={decrementItem}> DecrementItem </button>
+  //   </div>
+  // )
 }
 
-export default App;
+export default App
