@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div>
       <Home />
-    </div>
+    </div> 
   )
 
   // const [item, setItem] = useState(1);
