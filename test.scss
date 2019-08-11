@@ -1,0 +1,71 @@
+
+
+
+
+
+
+
+
+// 1. 가상선택자
+div:after {content:''; width: 100px}
+
+// 믹스인과 익스텐드
+
+
+
+div {
+    &:after {
+        
+    }
+    &:focus {
+
+    }
+}
+
+
+%font-size-14 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+@mixin font-size($size) {
+    font-size: $size;
+}
+
+
+
+
+@mixin font-14-regular {
+    font-size: 14;
+    font-weight: 400;
+}
+
+
+
+@mixin gradationUpToDown($topColor, $bottomColor) {
+    background: rgba(248,80,50,1);
+    background: linear-gradient(to bottom, $topColor 0%, $bottomColor 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#e73827', GradientType=0 );
+}
+
+
+$text_primary_dark: rgba(0,0,0,0.87);
+
+
+div {
+    @include gradationUpToDown(#000, #fff);
+}
+
+.gnb {
+    .title {
+        color: $text_primary_dark;
+        @include font-14-regular;
+    }
+}
+
+
+
+
+
+

@@ -1,14 +1,20 @@
-//import React,{ useState } from 'react';
-import React from 'react';
-import Home from './pages/Home'
+import React, { useState, useEffect } from 'react';
+import Home from './pages/Home';
+import GlobalStyle from './components/GlobalStyle';
+import styled from 'styled-components';
 
+const Apps = styled.div`
+    height: 1000vh;
+`
 // react hooks
-const App = () => {
 
+const App = () => {
   return (
-    <div>
+    <Apps>
+      {/* <H1 style={{color: y > 100? "red" : "yellow"}}>제목</H1> */}
+      <GlobalStyle />
       <Home />
-    </div> 
+    </Apps> 
   )
 
   // const [item, setItem] = useState(1);

@@ -3,21 +3,28 @@ import styled from 'styled-components';
 
 const TagComponent = styled.div`
         position: relative;
+        margin: 12px 0;
             & * {
-                padding:0; 
-                margin:0;
                 font-size:14px
             }
             ul {
                 overflow:hidden;
-                padding:12px 20px
             }
+`
+const TagComponentUl = styled.ul` 
+        width:100%;
 `
 const Taglist = styled.li`
         list-style:none;
         display:inline-block;
         margin:0 4px;
         position: relative;
+        &:first-child {
+            padding-left:20px;
+        }
+        &:last-child {
+            padding-right:20px;
+        }
 `
 const TagBtn = styled.button`
         padding: 11px 15px;
@@ -29,29 +36,18 @@ const TagBtn = styled.button`
             outline:none
         }
 `
-const TagItems = ['여행', '서울', '물놀이'];
+const TagItems = ['여행', '서울', '물놀이','여행'];
 const Tags = () => {
     const TagListItem = TagItems.map((TagItem, i) => {
         return (<Taglist key={i}><TagBtn>{TagItem}</TagBtn></Taglist>)
     })
     return (
         <TagComponent>
-            <ul>
+            <TagComponentUl>
                 {TagListItem}
-            </ul>
+            </TagComponentUl>
         </TagComponent>
     )
 }
 
-export default Tags
-
-
-//노마드 코더 훅. usescroll 
-// use관련  확인하기 callback ,성능 최적화 
-// 리액트 생명주기. -> useEfect 
-// useContecst 
-// useCallback
-
-// input value onChange 
-
-// ㄱㄷㅁㅊㅅ dev tool  톱니바퀴 . 
+export default Tags; 
