@@ -1,6 +1,6 @@
 import React from 'react'
 import GNB from '../../components/GNB'
-import Product from '../../components/Product'
+import ProductSlider from '../../components/ProductSlider'
 import styled from 'styled-components'
 
 const HomeWrap = styled.div`
@@ -10,7 +10,7 @@ const Home = () => {
     return (
         <HomeWrap>
             <GNB />
-            <Product />
+            <ProductSlider />
         </HomeWrap>
     )
 }
