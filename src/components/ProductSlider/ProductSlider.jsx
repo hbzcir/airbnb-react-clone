@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from "react-slick";
 import styled from 'styled-components';
 import "slick-carousel/slick/slick.css";
@@ -6,15 +6,17 @@ import "slick-carousel/slick/slick-theme.css";
 
 
 const ProductUl = styled.ul`
-    display: flex;
-    flex-wrap : nowrap;
-    outline: 1px solid red
+    width: 100%;
+    overflow: hidden;
 `
 const List = styled.li`
-    width: 140px;
+    width: 170px;
+    box-sizing:border-box;
+    border:1px solid #ccc;
+    padding: 10px;
+    background:#fff;
+        font-size:12px
 
-`
-const ProductLink = styled.a`
 `
 const ProductText = styled.div`
     box-shadow: 0px 0px 21px -11px rgba(0,0,0,0.75);
@@ -31,51 +33,41 @@ const ProductThumbNamil = styled.div`
     background: #ccc;
 `
 
-
-
 const ProductSlider = () => {
     const Listimgs = [
-        'img1','img1','img1'
+        'img1','img2','img3', 'img4','img5','img6'
     ]
     const ListNames = [
-        'na','nb','nc'
+        'na1','nb2','nc3', 'na4','nb5','nc6'
     ]
     const ListTitles = [
-        '상품쓰','상품쓰','상품쓰'
+        '상품쓰','상품쓰','상품쓰','상품쓰','상품쓰','상품쓰'
     ]
 
     const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-      };
+        speed: 300,
+        slidesToShow: 2,
+        rtl: false
+    };
 
     const ListItem = ListTitles.map((ListTitle, i) => {
         return (
-            
-            <List key={i}>
-                <ProductLink>
-                    <ProductThumbNamil>{Listimgs[i]}</ProductThumbNamil>
-                    <ProductText>
-                        <ProductName>ListTitle{i}</ProductName>
-                        <ProductInfo>{ListNames[i]} </ProductInfo>
-                    </ProductText>
-                </ProductLink>
+            <List key={i}> 
+                <ProductThumbNamil>{Listimgs[i]}</ProductThumbNamil>
+                <ProductText>
+                    <ProductName>ListTitle{i}</ProductName>
+                    <ProductInfo>{ListNames[i]} </ProductInfo>
+                </ProductText>
             </List>
-           
         )
     })
 
     return (
-      
+        <ProductUl>
             <Slider {...settings}>
-            <ProductUl>
-            {ListItem}
-            </ProductUl>
+                {ListItem}
             </Slider>
-        
+        </ProductUl>
     )
 }
 

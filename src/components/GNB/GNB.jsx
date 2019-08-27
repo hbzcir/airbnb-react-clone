@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Tags from './Tags';
 import styled from 'styled-components';
 //import interopRequireDefault from 'jest-util/build/interopRequireDefault';
-
+ 
 const SearchWrap = styled.div`
         width:100%;
         box-sizing: border-box;
