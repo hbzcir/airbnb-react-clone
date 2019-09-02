@@ -8,8 +8,10 @@ const SearchWrap = styled.div`
         box-sizing: border-box;
         position: fixed;
         top:0;
+        z-index:1;
         transform:${props => props.isScrollState < 100 ? 'translateY(0px)' : 'translateY(-60px)'};
         background: #fff;
+        border-bottom: 1px solid #EBEBEB;
         transition: transform 0.2s;
         
 `
