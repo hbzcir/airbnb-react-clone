@@ -7,32 +7,40 @@ import "slick-carousel/slick/slick-theme.css";
 
 const ProductUl = styled.ul`
     width: 100%;
-    overflow: hidden;
 `
 const List = styled.li`
     width: 170px;
     box-sizing:border-box;
-    border:1px solid #ccc;
-    padding: 10px;
+    padding: 4px;
+    border-radius: 3px;
     background:#fff;
-        font-size:12px
+   
+    :focus {
+        outline:none
+    }
+        font-size:12px;
+        div:focus {
+            outline:none
+        }
 
 `
 const ProductText = styled.div`
-    box-shadow: 0px 0px 21px -11px rgba(0,0,0,0.75);
-    padding:20px
+    min-height: 56px;
+    padding: 16px;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.06);
+    
 `
 const ProductName = styled.div`
     font-weight: bold;
     padding-bottom:10px
 `
 const ProductInfo = styled.div`
+       
 `
 const ProductThumbNamil = styled.div`
     height:100px;
     background: #ccc;
 `
-
 const ProductSlider = () => {
     const Listimgs = [
         'img1','img2','img3', 'img4','img5','img6'
@@ -46,8 +54,9 @@ const ProductSlider = () => {
 
     const settings = {
         speed: 300,
-        slidesToShow: 2,
-        rtl: false
+        slidesToShow: 2.5,
+        slidesToScroll: 1,
+        infinite: false
     };
 
     const ListItem = ListTitles.map((ListTitle, i) => {
