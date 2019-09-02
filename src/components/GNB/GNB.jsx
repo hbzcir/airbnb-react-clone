@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Tags from './Tags';
 import styled from 'styled-components';
 //import interopRequireDefault from 'jest-util/build/interopRequireDefault';
@@ -62,64 +62,65 @@ const Input = styled.input.attrs(props => ({
     `
 
 
-const GNB = () => {
-
-const useScroll = () => {
-    const [ state, setState ] = useState({
-        x : 0,
-        y : 0
-    })
-    const onScroll = () => {
-        setState({y:window.scrollY, x : window.scrollX})
-       
-    }
-    useEffect(() => {
-        window.addEventListener("scroll", onScroll);
-        return () => window.removeEventListener("scroll", onScroll)
-    }, [])
-
-    return state
+function useInput (defaultValue) {
+    const [value, setValue] = useState(defaultValue);
+    const onChange = e => {
+        //e.preventDefualt();
+        const {
+            target: { value }
+        } = e;
+        setValue(value);  
+        console.log(1,value);
+    };
+    return {value, onChange}
 }
 
+const GNB = () => {
+    const useScroll = () => {
+        const [ state, setState ] = useState({
+            x : 0,
+            y : 0
+        })
+
+        const onScroll = () => {
+            setState({y:window.scrollY, x : window.scrollX})
+        }
+
+        useEffect(() => {
+            window.addEventListener("scroll", onScroll);
+            return () => window.removeEventListener("scroll", onScroll)
+        }, [])
+
+        return state;
+    }
     const {y} = useScroll();
-    console.log(window.scrollY,'y',{y})
-    const [name, setName] = useState('');
+    //console.log(window.scrollY,'y',{y})
+
     const [inputIsActive, setInputIsActive] = useState(false);
+    const searchValue = useInput("");
+    console.log(2,searchValue.value);
+
+    const inputClear = e => {  
+        !searchValue.value.length ? console.log('value 없뜸') : console.log(' 여기서.. setValue 를 비워야하는데....');
+    }
     
-    const onChangeName = (e) => {
-        //e.preventDefualt();
-        setName(e.target.value);
-    }
-    const onClickCancle = (e) => {
-        return setInputIsActive(false)
-    }
-    const onFocusField = (e) => {
+    const onFocusField = e => {
         setInputIsActive(true)
-    }
-    const onBlurField = (e) => {
-        setInputIsActive(false)
-    }
-    const inputClear = (e) => {
-        !name.length ? console.log('value 없뜸') : setName('');
-    }
-    const handleSubmit = (e) => {
+    }    
+    const handleSubmit = e => {
         e.preventDefault();
     }
-
+    
     return (
         <SearchWrap isScrollState={y}>
-            {/* <Input type="text" placeholder="'서울'에 가보는 건 어떠세요?" />
-            <Button>취소</Button> */}
             <form onSubmit={handleSubmit}>
                 <SearchInput isActive={inputIsActive}>
-                    <Input type="text" value={name} onChange={onChangeName} onFocus={onFocusField} placeholder="'서울'에 가보는 건 어떠세요?" />
+                    <Input type="text" {...searchValue} onFocus={onFocusField} placeholder="'서울'에 가보는 건 어떠세요?" />
                     <ClearButton onClick={inputClear} isActive={inputIsActive}>X</ClearButton> 
-                </SearchInput>
-                <CancelButton onClick={onClickCancle} isActive={inputIsActive} onBlur={onBlurField}>취소</CancelButton> 
+                </SearchInput>   
             </form>
             <Tags/>
         </SearchWrap>
-        
     )
 }
 
