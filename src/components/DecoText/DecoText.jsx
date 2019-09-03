@@ -9,6 +9,7 @@ const DecoTextWrap = styled.div`
 const InfoText = styled.span`
     display: inline-block;
     margin: 0px;
+    width: 100%;
     padding-bottom: 16px;
     border-bottom: 1px solid #EBEBEB;
     word-wrap: break-word;
@@ -21,7 +22,7 @@ const InfoText = styled.span`
 const DecoText = () => {
     return (
         <DecoTextWrap>
-           <InfoText>여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수 있습니다. 관광세가 추가로 부과될 수 있습니다.</InfoText>
+           <InfoText>여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수 있습니다.<br />관광세가 추가로 부과될 수 있습니다.</InfoText>
         </DecoTextWrap>
 
     )

@@ -1,8 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import Tags from './Tags';
 import styled from 'styled-components';
+import {Cancel} from 'styled-icons/material/Cancel'
 //import interopRequireDefault from 'jest-util/build/interopRequireDefault';
- 
+const IconCancel = styled(Cancel)`
+        color: #ccc;
+        width:20px;
+        height:20px;
+        opacity: ${props => props.isActive ? '1' : '0'};
+`
+
+const FormArea = styled.div`
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 16px 20px 0;
+`
 const SearchWrap = styled.div`
         width:100%;
         box-sizing: border-box;
@@ -18,8 +32,7 @@ const SearchWrap = styled.div`
 const SearchInput = styled.div`
         position: relative;
         box-sizing: border-box;
-        margin: 16px 20px 0;
-        width: ${props => props.isActive ? 'calc(100% - 82px)' : 'initial' };
+        width: ${props => props.isActive ? 'calc(100% - 50px)' : '100%' };
         font-size: 14px;
         line-height: 1.43;
         color: #484848;
@@ -28,13 +41,14 @@ const SearchInput = styled.div`
         background: #F2F2F2;
 `
 const CancelButton = styled.button`
-        position: absolute;
-        top: 0;
-        right: 15px;
-        padding:10px;
+        height:39px;
         color: #000;
         font-size: 14px;
         outline:none;
+        border:0;
+        padding:0;
+        background:none;
+        width: ${props => props.isActive ? '50px' : '0'};
         opacity: ${props => props.isActive ? '1' : '0'};
     `
 const ClearButton = styled.button`
@@ -48,7 +62,7 @@ const ClearButton = styled.button`
         outline:none;
         border:0;
         border-radius:100%;
-opacity: ${props => props.isActive ? '1' : '0'};
+        opacity: ${props => props.isActive ? '1' : '0'};
     `
 const Input = styled.input.attrs(props => ({
         type: "text"
@@ -65,14 +79,13 @@ const Input = styled.input.attrs(props => ({
 function useInput (defaultValue) {
     const [value, setValue] = useState(defaultValue);
     const onChange = e => {
-        //e.preventDefualt();
         const {
             target: { value }
         } = e;
         setValue(value);  
-        console.log(1,value);
     };
-    return {value, onChange}
+    
+    return {value, setValue, onChange}
 }
 
 const GNB = () => {
@@ -94,18 +107,21 @@ const GNB = () => {
         return state;
     }
     const {y} = useScroll();
-    //console.log(window.scrollY,'y',{y})
 
     const [inputIsActive, setInputIsActive] = useState(false);
     const searchValue = useInput("");
-    console.log(2,searchValue.value);
 
     const inputClear = e => {  
-        !searchValue.value.length ? console.log('value 없뜸') : console.log(' 여기서.. setValue 를 비워야하는데....');
+        !searchValue.value.length ? console.log('value 없뜸') : searchValue.setValue('');
     }
-    
+    const onClickCancle = (e) => {
+        return setInputIsActive(false)
+    }
     const onFocusField = e => {
         setInputIsActive(true)
+    }
+    const onBlurField = (e) => {
+        setInputIsActive(false)
     }    
     const handleSubmit = e => {
         e.preventDefault();
@@ -114,10 +130,13 @@ const GNB = () => {
     return (
         <SearchWrap isScrollState={y}>
             <form onSubmit={handleSubmit}>
+                <FormArea>
                 <SearchInput isActive={inputIsActive}>
                     <Input type="text" {...searchValue} onFocus={onFocusField} placeholder="'서울'에 가보는 건 어떠세요?" />
-                    <ClearButton onClick={inputClear} isActive={inputIsActive}>X</ClearButton> 
+                    <IconCancel onClick={inputClear} isActive={inputIsActive} />
                 </SearchInput>   
+                <CancelButton onClick={onClickCancle} isActive={inputIsActive} onBlur={onBlurField}>취소</CancelButton> 
+                </FormArea>    
             </form>
             <Tags/>
         </SearchWrap>
